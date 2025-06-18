@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detaljer - Østerbro Jagttegn</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <div class="container">
+        <div class="text-content">
+            <h2>Detaljer om Jagttegnskurset</h2>
+            <p>Vores jagttegnskursus er designet til at give dig en grundig forståelse af jagt, vildtforvaltning og sikkerhed. Kurset er opdelt i teoretisk og praktisk undervisning, som forbereder dig optimalt til jagtprøven.</p>
+            <p>Den **teoretiske del** dækker emner som vildtkendskab, jagtlovgivning, våbenlære, sikkerhed og etik. Vi bruger moderne undervisningsmaterialer og interaktive metoder for at gøre læringen engagerende og effektiv. Du vil få adgang til online ressourcer og quizzer, så du kan øve dig hjemmefra.</p>
+            <p>Den **praktiske del** fokuserer på sikker våbenhåndtering, skydeteknik og afstandsbedømmelse. Vi øver på skydebanen under kyndig vejledning, så du opnår den nødvendige færdighed med haglgevær. Dette inkluderer også træning i vildtbedømmelse og korrekt adfærd i felten.</p>
+            <p>Vi lægger stor vægt på ansvarlig jagt og respekt for naturen. Vores mål er ikke blot at give dig et jagttegn, men at udstyre dig med de færdigheder og den etik, der kræves for at være en ansvarlig og respekteret jæger.</p>
+        </div>
+        <div class="image-content">
+            <img src="details_image.jpg" alt="Billede af jagttegnskursusdetaljer">
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Funktion til at indlæse HTML fra en fil og indsætte den i et element
+        async function loadHTML(url, elementId) {
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`Fejl ved indlæsning af ${url}:`, error);
+            }
+        }
+
+        // Kør funktionerne, når DOM'en er fuldt indlæst
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHTML('header.html', 'header-placeholder');
+            loadHTML('footer.html', 'footer-placeholder');
+        });
+    </script>
+</body>
+</html>
