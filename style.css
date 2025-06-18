@@ -1,0 +1,102 @@
+/* Grundlæggende styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff; /* Hvid baggrund for hele siden */
+    color: #333;
+    display: flex; /* Gør body til en flex-container */
+    flex-direction: column; /* Stabler indholdet vertikalt */
+    min-height: 100vh; /* Sørger for, at body fylder hele viewport-højden */
+}
+
+/* Header styling */
+header {
+    background-color: #ffffff; /* Hvid baggrund for headeren */
+    color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: none;
+    border-bottom: 1px solid #eee; /* Tynd linje for at adskille headeren diskret */
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: #666; /* Grå farve for links i navigationen */
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #333; /* Mørkere grå ved hover */
+}
+
+/* Hovedindhold styling */
+.container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    background-color: #ffffff;
+    box-shadow: none;
+    border-radius: 0;
+    flex-grow: 1; /* Sørger for, at containeren fylder al tilgængelig plads */
+}
+
+.text-content {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.image-content {
+    flex: 1;
+    text-align: center;
+}
+
+.image-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0;
+}
+
+/* Footer styling */
+footer {
+    background-color: #ffffff; /* Hvid baggrund for footeren */
+    color: #666; /* Tekstfarve for copyright */
+    text-align: center;
+    padding: 20px;
+    /* Ingen margin-top eller border-top, da den skal være flad og uden adskillelse */
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .text-content {
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+}
