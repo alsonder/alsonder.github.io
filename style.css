@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #ffffff;
-    color: #333;
+    color: #006400;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -97,7 +97,7 @@ nav ul li a:hover {
 /* Footer styling */
 footer {
     background-color: #ffffff;
-    color: #666;
+    color: #006400;
     text-align: center;
     padding: 20px;
     margin-top: 0;
