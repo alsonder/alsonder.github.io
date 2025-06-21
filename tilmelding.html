@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tilmelding - Østerbro Jagttegn</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        #mc_embed_signup {
+            background: #fff;
+            clear: left;
+            font: 14px Helvetica, Arial, sans-serif;
+            width: 100%;
+        }
+        .form-image-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .form-content {
+            flex: 1;
+            margin-left: auto; /* Følger venstre margin */
+            margin-right: auto;
+        }
+        .text-content {
+            margin-bottom: 20px;
+        }
+        .image-content {
+            flex: 1;
+            text-align: center;
+        }
+        .image-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <div class="container">
+        <div class="form-image-container">
+            <div class="form-content">
+                <div class="text-content">
+                    <h2>Tilmelding</h2>
+                    <p>For at tilmelde dig jagttegnskurset, skal du udfylde formularen nedenfor. Efter vi har modtaget din tilmelding, sender vi dig betalingsinformationer. Din tilmelding er først godkendt, når betalingen er registreret.</p>
+                </div>
+                <div id="mc_embed_signup">
+                    <form action="https://foxfox.us18.list-manage.com/subscribe/post?u=8af87ed2e81ace8587915d4ce&amp;id=354106840a&amp;f_id=006babe6f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+                        <div id="mc_embed_signup_scroll">
+                            <div class="indicates-required"><span class="asterisk">*</span> skal udfyldes</div>
+                            <div class="mc-field-group">
+                                <label for="mce-FNAME">Navn <span class="asterisk">*</span></label>
+                                <input type="text" name="FNAME" class="required text" id="mce-FNAME" required>
+                            </div>
+                            <div class="mc-field-group">
+                                <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
+                                <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required>
+                            </div>
+                            <div id="mce-responses" class="clear foot">
+                                <div class="response" id="mce-error-response" style="display: none;"></div>
+                                <div class="response" id="mce-success-response" style="display: none;"></div>
+                            </div>
+                            <div aria-hidden="true" style="position: absolute; left: -5000px;">
+                                <input type="text" name="b_8af87ed2e81ace8587915d4ce_354106840a" tabindex="-1" value="">
+                            </div>
+                            <div class="optionalParent">
+                                <div class="clear foot">
+                                    <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Tilmeld">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="image-content">
+                <img src="signup_image.jpg" alt="Billede relateret til tilmelding">
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Funktion til at indlæse HTML fra en fil og indsætte den i et element
+        async function loadHTML(url, elementId) {
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`Fejl ved indlæsning af ${url}:`, error);
+            }
+        }
+
+        // Kør funktionerne, når DOM'en er fuldt indlæst
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHTML('header.html', 'header-placeholder');
+            loadHTML('footer.html', 'footer-placeholder');
+        });
+    </script>
+</body>
+</html>
