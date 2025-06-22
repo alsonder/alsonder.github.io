@@ -16,14 +16,14 @@
             <p>Kurset udbydes ved Svanemøllen Strand på grænsen mellem Østerbro og Hellerup af erfaren jæger</p>
         </div>
         <div class="image-content">
-            <img src="IMG_5326.jpg" alt="Beskrivende billede">
+            <img src="mandhund.jpg" alt="Aleksander Sonder">
         </div>
     </div>
 
     <div id="footer-placeholder"></div>
 
     <script>
-        // Funktion til at indlæse HTML fra en fil og indsætte den i et element
+        // Funktion til at indlæse HTML fra en fil
         async function loadHTML(url, elementId) {
             try {
                 const response = await fetch(url);
@@ -34,7 +34,13 @@
             }
         }
 
-        // Kør funktionerne, når DOM'en er fuldt indlæst
+        // Funktion til at toggle mobilmenu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('active');
+        }
+
+        // Indlæs header og footer
         document.addEventListener('DOMContentLoaded', () => {
             loadHTML('header.html', 'header-placeholder');
             loadHTML('footer.html', 'footer-placeholder');
