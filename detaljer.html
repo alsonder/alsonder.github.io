@@ -17,74 +17,110 @@
             <p>Forløbet er intensivt og det forudsætter, at aspiranten investerer en del tid på stoffet ved siden af lektionerne</p>
             <p>Her kan du se det fulde overblik over kursusdagene:</p>
         
-            <table style="width:100%; border-collapse: collapse; margin-top: 1rem;">
+            <table class="course-table">
                 <thead>
-                    <tr style="background-color: #f0f0f0;">
-                        <th style="padding: 8px; border: 1px solid #ccc;">Dato</th>
-                        <th style="padding: 8px; border: 1px solid #ccc;">Indhold</th>
-                        <th style="padding: 8px; border: 1px solid #ccc;">Tidspunkt</th>
+                    <tr>
+                        <th>Dato</th>
+                        <th>Indhold</th>
+                        <th>Tidspunkt</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Torsdag 14/8</td>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Teori (Svanemøllen)</td>
-                        <td style="padding: 8px; border: 1px solid #ccc;">20:30 – 22:10</td>
+                        <td>Torsdag 14/8</td>
+                        <td>Teori (Svanemøllen)</td>
+                        <td>20:30 – 22:10</td>
                     </tr>
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Torsdag 21/8</td>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Teori (Svanemøllen)</td>
-                        <td style="padding: 8px; border: 1px solid #ccc;">20:30 – 22:10</td>
+                        <td>Torsdag 21/8</td>
+                        <td>Teori (Svanemøllen)</td>
+                        <td>20:30 – 22:10</td>
                     </tr>
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Torsdag 28/8</td>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Teori (Svanemøllen)</td>
-                        <td style="padding: 8px; border: 1px solid #ccc;">20:30 – 22:10</td>
+                        <td>Torsdag 28/8</td>
+                        <td>Teori (Svanemøllen)</td>
+                        <td>20:30 – 22:10</td>
                     </tr>
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Lørdag 30/8</td>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Skydning og afstandsbedømmelse (Hørsholm)</td>
-                        <td style="padding: 8px; border: 1px solid #ccc;">09:00 – 16:00</td>
+                        <td>Lørdag 30/8</td>
+                        <td>Skydning og afstandsbedømmelse (Hørsholm)</td>
+                        <td>09:00 – 16:00</td>
                     </tr>
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Torsdag 4/9</td>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Teori (Svanemøllen)</td>
-                        <td style="padding: 8px; border: 1px solid #ccc;">20:30 – 22:10</td>
+                        <td>Torsdag 4/9</td>
+                        <td>Teori (Svanemøllen)</td>
+                        <td>20:30 – 22:10</td>
                     </tr>
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Torsdag 11/9</td>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Teori (Svanemøllen)</td>
-                        <td style="padding: 8px; border: 1px solid #ccc;">20:30 – 22:10</td>
+                        <td>Torsdag 11/9</td>
+                        <td>Teori (Svanemøllen)</td>
+                        <td>20:30 – 22:10</td>
                     </tr>
                     <tr>
-                        <td style="padding: 8px; border: 1px solid #ccc;">1/9 - 31/11</td>
-                        <td style="padding: 8px; border: 1px solid #ccc;">Jagtprøver (Nordsjælland/Kbh)</td>
-                        <td style="padding: 8px; border: 1px solid #ccc;">09:00 - 15:00</td>
+                        <td>1/9 - 31/11</td>
+                        <td>Jagtprøver (Nordsjælland/Kbh)</td>
+                        <td>09:00 - 15:00</td>
                     </tr>
                 </tbody>
             </table>
         </div>
         
         <div class="image-content">
-            <img src="details_image.jpg" alt="Billede af jagttegnskursusdetaljer">
+            <img src="sneppe.jpg" alt="Billede af jagttegnskursusdetaljer">
         </div>
     </div>
 
     <div id="footer-placeholder"></div>
 
     <script>
-        // Funktion til at indlæse HTML fra en fil og indsætte den i et element
+        // Funktion til at indlæse HTML fra en fil
         async function loadHTML(url, elementId) {
             try {
                 const response = await fetch(url);
                 const html = await response.text();
                 document.getElementById(elementId).innerHTML = html;
+                console.log(`Header loaded for ${url}`); // Log for at verificere indlæsning
+
+                // Tilføj event listener til hamburger-menuen
+                const hamburger = document.querySelector('.hamburger-menu');
+                if (hamburger) {
+                    hamburger.addEventListener('click', toggleMenu);
+                } else {
+                    console.warn('Hamburger-menu ikke fundet');
+                }
+
+                // Tilføj event listener til mobilmenuens links for at lukke menuen
+                const menuLinks = document.querySelectorAll('.mobile-menu ul li a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        const menu = document.getElementById('mobile-menu');
+                        if (menu) {
+                            menu.classList.remove('active');
+                        }
+                    });
+                });
+
+                // Tilføj event listener til lukkeknap
+                const closeButton = document.querySelector('.close-menu');
+                if (closeButton) {
+                    closeButton.addEventListener('click', toggleMenu);
+                }
             } catch (error) {
                 console.error(`Fejl ved indlæsning af ${url}:`, error);
             }
         }
 
-        // Kør funktionerne, når DOM'en er fuldt indlæst
+        // Funktion til at toggle mobilmenu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) {
+                menu.classList.toggle('active');
+            } else {
+                console.warn('Mobilmenu ikke fundet');
+            }
+        }
+
+        // Indlæs header og footer
         document.addEventListener('DOMContentLoaded', () => {
             loadHTML('header.html', 'header-placeholder');
             loadHTML('footer.html', 'footer-placeholder');

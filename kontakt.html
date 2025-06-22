@@ -15,8 +15,6 @@
             <p>Mød Aleksander, en 44-årig passioneret jæger, ingeniør og familiefar, der bor på Østerbro med sin kone, deres to døtre og den trofaste jagthund Amy. Med næsten 30 års erfaring som jæger med gevær og en særlig forkærlighed for kronvildtsjagt i Thys vilde natur, bringer Aleksander en unik kombination af ekspertise og entusiasme til sin undervisning. Siden 2023 har han været certificeret jagttegnsunderviser og skydeinstruktør, hvor han deler sin viden og kærlighed til jagt med nye jægere.</p>
             <p>Aleksander brænder for at gøre jagttegnsforløbet både lærerigt og underholdende. Hans undervisning er en dynamisk blanding af praktisk tørtræning, hvor du får hands-on erfaring, og moderne online quizzes, der gør teorien sjov og engagerende. Uanset om du er helt ny i jagtverdenen eller ønsker at finpudse dine færdigheder, sørger Aleksander for, at du føler dig tryg og godt klædt på til at bestå jagttegnet – og til at tage på jagt med respekt for naturen.</p>
             
-            
-
             <h2>Kontakt Aleksander</h2>
             <p>Har du spørgsmål, eller vil du høre mere om jagttegnsforløbet? Du er altid velkommen til at kontakte Aleksander for en uforpligtende snak.</p>
             <p><strong>Email:</strong> <a href="mailto:aleksander.soender@gmail.com">aleksander.soender@gmail.com</a></p>
@@ -30,18 +28,49 @@
     <div id="footer-placeholder"></div>
 
     <script>
-        // Funktion til at indlæse HTML fra en fil og indsætte den i et element
+        // Funktion til at indlæse HTML fra en fil
         async function loadHTML(url, elementId) {
             try {
                 const response = await fetch(url);
                 const html = await response.text();
                 document.getElementById(elementId).innerHTML = html;
+
+                // Tilføj event listener til hamburger-menuen
+                const hamburger = document.querySelector('.hamburger-menu');
+                if (hamburger) {
+                    hamburger.addEventListener('click', toggleMenu);
+                }
+
+                // Tilføj event listener til mobilmenuens links for at lukke menuen
+                const menuLinks = document.querySelectorAll('.mobile-menu ul li a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        const menu = document.getElementById('mobile-menu');
+                        if (menu) {
+                            menu.classList.remove('active');
+                        }
+                    });
+                });
+
+                // Tilføj event listener til lukkeknap
+                const closeButton = document.querySelector('.close-menu');
+                if (closeButton) {
+                    closeButton.addEventListener('click', toggleMenu);
+                }
             } catch (error) {
                 console.error(`Fejl ved indlæsning af ${url}:`, error);
             }
         }
 
-        // Kør funktionerne, når DOM'en er fuldt indlæst
+        // Funktion til at toggle mobilmenu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) {
+                menu.classList.toggle('active');
+            }
+        }
+
+        // Indlæs header og footer
         document.addEventListener('DOMContentLoaded', () => {
             loadHTML('header.html', 'header-placeholder');
             loadHTML('footer.html', 'footer-placeholder');

@@ -146,6 +146,59 @@ header {
 .image-content img {
     max-width: 100%;
     height: auto;
+    border-radius: 8px;
+}
+
+/* Formular og billede layout (til tilmelding.html) */
+.form-image-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+}
+
+.form-content {
+    flex: 1;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#mc_embed_signup {
+    background: #fff;
+    clear: left;
+    font: 14px Helvetica, Arial, sans-serif;
+    width: 100%;
+}
+
+/* Liste styling (fra pris.html) */
+.course-list {
+    list-style: disc;
+    margin: 1rem 0;
+    padding-left: 20px;
+}
+
+.course-list li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+/* Tabel styling (fra detaljer.html) */
+.course-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+.course-table th,
+.course-table td {
+    padding: 8px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.course-table th {
+    background-color: #f0f0f0;
 }
 
 /* Footer styling */
@@ -185,6 +238,30 @@ footer {
         padding-right: 0;
         margin-bottom: 20px;
     }
+
+    /* Responsiv formular og billede layout */
+    .form-image-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-content {
+        width: 100%;
+        margin: 0;
+    }
+
+    /* Responsiv liste */
+    .course-list {
+        padding-left: 15px;
+        font-size: 14px;
+    }
+
+    /* Responsiv tabel */
+    .course-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
 }
 
 @media (max-width: 480px) {
@@ -206,5 +283,19 @@ footer {
 
     .text-content p {
         font-size: 14px;
+    }
+
+    .course-list {
+        font-size: 13px;
+    }
+
+    .course-table th,
+    .course-table td {
+        font-size: 13px;
+        padding: 6px;
+    }
+
+    #mc_embed_signup {
+        font-size: 13px;
     }
 }
