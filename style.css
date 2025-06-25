@@ -123,14 +123,19 @@ header {
 
 /* Hovedindhold styling */
 .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: block;
     padding: 40px 60px;
     max-width: 1000px;
     margin: 20px auto;
     background-color: #ffffff;
     flex-grow: 1;
+}
+
+/* Standard container med flex (for index.html og andre sider) */
+.container.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     gap: 40px;
 }
 
@@ -258,10 +263,13 @@ footer {
         padding: 10px 15px;
     }    .logo-text a {
         font-size: 24px;
-    }.container {
+    }    .container {
+        padding: 20px 15px;
+    }
+
+    .container.flex-container {
         flex-direction: column;
         text-align: center;
-        padding: 20px 15px;
         gap: 20px;
     }
 
