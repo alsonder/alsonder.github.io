@@ -12,6 +12,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    max-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* Header styling */
@@ -126,11 +128,13 @@ header {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 40px 15px;
+    padding: 2vh 15px;
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 0 auto;
     background-color: #ffffff;
     flex-grow: 1;
+    min-height: calc(100vh - 120px); /* Justér baseret på header/footer højde */
+    box-sizing: border-box;
 }
 
 .text-content {
@@ -138,15 +142,33 @@ header {
     padding-right: 20px;
 }
 
+.text-content h2 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.text-content p {
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
 .image-content {
     flex: 1;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .image-content img {
     max-width: 100%;
+    max-height: 70vh;
+    width: auto;
     height: auto;
     border-radius: 8px;
+    object-fit: contain;
 }
 
 /* Formular og billede layout (til tilmelding.html) */
@@ -211,6 +233,83 @@ footer {
 }
 
 /* Responsive design */
+
+/* Korte skærme (landscape tablets, korte laptops) */
+@media (max-height: 600px) and (min-width: 769px) {
+    .container {
+        padding: 1vh 15px;
+        min-height: calc(100vh - 80px);
+    }
+    
+    .text-content h2 {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .text-content p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+        margin-bottom: 0.5rem;
+    }
+    
+    .image-content img {
+        max-height: 50vh;
+    }
+}
+
+/* Større computerskærme (1920px og op) */
+@media (min-width: 1920px) {
+    .container {
+        padding: 3vh 20px;
+        min-height: calc(100vh - 140px);
+    }
+    
+    .text-content h2 {
+        font-size: 2.5rem;
+    }
+    
+    .text-content p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+    
+    .logo-text a {
+        font-size: 32px;
+    }
+}
+
+/* Standard desktop (1200px - 1919px) */
+@media (min-width: 1200px) and (max-width: 1919px) {
+    .container {
+        padding: 2.5vh 20px;
+        min-height: calc(100vh - 130px);
+    }
+}
+
+/* Mindre desktop/laptop (992px - 1199px) */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .container {
+        padding: 2vh 15px;
+        min-height: calc(100vh - 120px);
+    }
+    
+    .text-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .text-content p {
+        font-size: 1rem;
+    }
+}
+
+/* Tablets i landscape (769px - 991px) */
+@media (min-width: 769px) and (max-width: 991px) {
+    .container {
+        padding: 1.5vh 15px;
+        min-height: calc(100vh - 110px);
+    }
+}
+
 @media (max-width: 768px) {
     .desktop-menu {
         display: none;
