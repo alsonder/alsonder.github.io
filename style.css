@@ -516,21 +516,26 @@ footer p {
 
     /* Responsive ledig pladser modul */
     .available-spots-module {
-        flex-direction: column;
-        align-items: flex-start;
-        max-width: 100%;
+        margin: 15px auto 0 auto;
+        width: fit-content;
+        padding: 8px 14px;
+        font-size: 15px;
     }
 
     .spots-icon {
-        font-size: 20px;
+        font-size: 16px;
+    }
+
+    .spots-text {
+        gap: 5px;
     }
 
     .spots-number {
-        font-size: 24px;
+        font-size: 15px;
     }
 
     .spots-label {
-        font-size: 12px;
+        font-size: 15px;
     }
 }
 
@@ -571,5 +576,22 @@ footer p {
 
     footer {
         padding: 20px 10px;
+    }    /* Ledig pladser modul på små skærme */
+    .available-spots-module {
+        margin: 12px auto 0 auto;
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .spots-icon {
+        font-size: 14px;
+    }
+
+    .spots-number {
+        font-size: 14px;
+    }
+
+    .spots-label {
+        font-size: 13px;
     }
 }
