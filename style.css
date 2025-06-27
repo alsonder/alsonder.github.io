@@ -445,16 +445,11 @@ footer p {
         flex-direction: column;
         text-align: center;
         gap: 10px;
-    }
-
-    .price-info,
+    }    .price-info,
     .availability-info {
         align-items: center;
-    }    /* Responsive ledig pladser modul */
-    .available-spots-module {
-        /* Behold standard layout på mobil */
     }
-
+    
     /* Responsiv formular og billede layout */
     .form-image-container {
         flex-direction: column;
