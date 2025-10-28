@@ -1,0 +1,35 @@
+<!-- quiz.html -->
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jagttegn Quiz - Østerbro Jagttegn</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div id="header"></div>
+
+  <main class="container">
+    <section class="intro">
+      <h1>Jagttegn Quiz</h1>
+      <p>Træn til teoriprøven med 2000+ spørgsmål – tilpasset dine svagheder.</p>
+      <div id="quiz-frame">
+        <p><strong>Henter quiz...</strong></p>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer"></div>
+
+  <script src="script.js"></script>
+  <script>
+    // Indlæs quiz i iframe (sømløs integration)
+    document.getElementById('quiz-frame').innerHTML = `
+      <iframe src="https://jagttegn-quiz.vercel.app" 
+              style="width:100%; height:800px; border:none; border-radius:12px;"
+              loading="lazy"></iframe>
+    `;
+  </script>
+</body>
+</html>
