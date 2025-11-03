@@ -96,12 +96,12 @@
                 
                 <form action="https://formspree.io/f/mvgwjebv" method="POST">
                     <div class="mc-field-group">
-                        <label for="kursus-type">Kursus-type <span class="asterisk">*</span></label>
-                        <select id="kursus-type" name="kursus-type" required>
-                            <option value="">Vælg en type</option>
-                            <option value="grundkursus">Grundkursus</option>
-                            <option value="avanceret">Avanceret</option>
-                            <option value="andet">Andet (specificér i besked)</option>
+                        <label for="hold">Vælg hold <span class="asterisk">*</span></label>
+                        <select id="hold" name="hold" required>
+                            <option value="">Vælg et hold</option>
+                            <option value="ekstra-vinter">Ekstra vinter</option>
+                            <option value="forår">Forår</option>
+                            <option value="sensommer">Sensommer</option>
                         </select>
                     </div>
                     
@@ -166,7 +166,7 @@
         // Funktion til at toggle mobilmenu
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
-            if (media) {
+            if (menu) {
                 menu.classList.toggle('active');
             }
         }
