@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="da">
-<head>    <meta charset="UTF-8">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tilmelding - Østerbro Jagttegn</title>
     
@@ -13,7 +14,76 @@
     
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦊</text></svg>">
-    <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+
+    <!-- Opgraderet inline CSS for form-design -->
+    <style>
+        .form-content form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .mc-field-group {
+            margin-bottom: 20px;
+        }
+        .mc-field-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2c5530; /* Mørkegrøn for jagt-tema */
+            font-size: 1.1em;
+        }
+        .mc-field-group input,
+        .mc-field-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+        }
+        .mc-field-group input:focus,
+        .mc-field-group select:focus {
+            border-color: #4a7c59; /* Grøn accent */
+            box-shadow: 0 0 8px rgba(74, 124, 89, 0.3);
+            outline: none;
+        }
+        .clear.foot {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button {
+            background-color: #4a7c59;
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%;
+        }
+        .button:hover {
+            background-color: #3a6c49;
+            transform: translateY(-2px);
+        }
+        .asterisk {
+            color: #e74c3c;
+        }
+        /* Responsivitet for mobile */
+        @media (max-width: 768px) {
+            .form-content {
+                padding: 0 20px;
+            }
+            .form-image-container {
+                flex-direction: column;
+            }
+            .image-content img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
 </head>
 <body>
     <div id="header-placeholder"></div>
@@ -23,33 +93,32 @@
             <div class="form-content">
                 <h2>Tilmelding</h2>
                 <p>For at tilmelde dig jagttegnskurset, skal du udfylde formularen nedenfor. Efter din tilmelding er modtaget, sendes betalingsinformationer. Din tilmelding er først godkendt, når betalingen er registreret.</p>
-                <div id="mc_embed_signup">
-                    <form action="https://foxfox.us18.list-manage.com/subscribe/post?u=8af87ed2e81ace8587915d4ce&id=354106840a&f_id=006babe6f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-                        <div id="mc_embed_signup_scroll">
-                            <div class="indicates-required"><span class="asterisk">*</span> skal udfyldes</div>
-                            <div class="mc-field-group">
-                                <label for="mce-FNAME">Navn <span class="asterisk">*</span></label>
-                                <input type="text" name="FNAME" class="required text" id="mce-FNAME" required>
-                            </div>
-                            <div class="mc-field-group">
-                                <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
-                                <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required>
-                            </div>
-                            <div id="mce-responses" class="clear foot">
-                                <div class="response" id="mce-error-response" style="display: none;"></div>
-                                <div class="response" id="mce-success-response" style="display: none;"></div>
-                            </div>
-                            <div aria-hidden="true" style="position: absolute; left: -5000px;">
-                                <input type="text" name="b_8af87ed2e81ace8587915d4ce_354106840a" tabindex="-1" value="">
-                            </div>
-                            <div class="optionalParent">
-                                <div class="clear foot">
-                                    <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Tilmeld">
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                
+                <form action="https://formspree.io/f/mvgwjebv" method="POST">
+                    <div class="mc-field-group">
+                        <label for="kursus-type">Kursus-type <span class="asterisk">*</span></label>
+                        <select id="kursus-type" name="kursus-type" required>
+                            <option value="">Vælg en type</option>
+                            <option value="grundkursus">Grundkursus</option>
+                            <option value="avanceret">Avanceret</option>
+                            <option value="andet">Andet (specificér i besked)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mc-field-group">
+                        <label for="navn">Navn <span class="asterisk">*</span></label>
+                        <input type="text" id="navn" name="navn" class="required text" required>
+                    </div>
+                    
+                    <div class="mc-field-group">
+                        <label for="email">Email <span class="asterisk">*</span></label>
+                        <input type="email" id="email" name="email" class="required email" required>
+                    </div>
+                    
+                    <div class="clear foot">
+                        <button type="submit" class="button">Tilmeld</button>
+                    </div>
+                </form>
             </div>
             <div class="image-content">
                 <img src="hytte.jpg" alt="Billede relateret til tilmelding">
@@ -97,10 +166,12 @@
         // Funktion til at toggle mobilmenu
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
-            if (menu) {
+            if (media) {
                 menu.classList.toggle('active');
             }
-        }        // Indlæs header og footer
+        }
+        
+        // Indlæs header og footer
         document.addEventListener('DOMContentLoaded', () => {
             loadHTML('header.html', 'header-placeholder');
             loadHTML('footer.html', 'footer-placeholder');
