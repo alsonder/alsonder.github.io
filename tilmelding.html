@@ -9,11 +9,25 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://østerbrojagttegn.dk/tilmelding.html">
     <meta property="og:title" content="🦊 Tilmeld dig - Østerbro Jagttegn">
-    <meta property="og:description" content="Tilmeld dig jagttegnskurset nu! Kun 4 ledige pladser tilbage. Start august 2025 på Østerbro.">
+    <meta property="og:description" content="Tilmeld dig jagttegnskurset nu! Ledige pladser til vinter 2025/26 startende 1. december på Østerbro.">
     <meta property="og:image" content="https://østerbrojagttegn.dk/hytte.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="🦊 Tilmeld dig - Østerbro Jagttegn">
+    <meta property="twitter:description" content="Tilmeld dig jagttegnskurset nu! Ledige pladser til vinter 2025/26 startende 1. december på Østerbro.">
     
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦊</text></svg>">
+
+    <!-- Google tag (gtag.js) – tilføjet for konsistens med andre sider -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4BV4PEQX4N"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-4BV4PEQX4N');
+    </script>
 
     <!-- Opgraderet inline CSS for form-design -->
     <style>
@@ -96,12 +110,12 @@
                 
                 <form action="https://formspree.io/f/mvgwjebv" method="POST">
                     <div class="mc-field-group">
-                        <label for="hold">Vælg hold <span class="asterisk">*</span></label>
+                        <label for="hold">Tilgængelige kurser <span class="asterisk">*</span></label>
                         <select id="hold" name="hold" required>
-                            <option value="">Vælg et hold</option>
-                            <option value="ekstra-vinter">Ekstra vinter</option>
-                            <option value="forår">Forår</option>
-                            <option value="sensommer">Sensommer</option>
+                            <option value="">Vælg et kursus</option>
+                            <option value="vinter 25_26">Vinter 2025-26, start 1. december</option>
+                            <option value="forår">Forår 2026, start 5. marts</option>
+                            <option value="sensommer">Sensommer 2026, start 13. august</option>
                         </select>
                     </div>
                     
@@ -135,11 +149,14 @@
                 const response = await fetch(url);
                 const html = await response.text();
                 document.getElementById(elementId).innerHTML = html;
+                console.log(`Header loaded for ${url}`); // Log for at verificere indlæsning
 
                 // Tilføj event listener til hamburger-menuen
                 const hamburger = document.querySelector('.hamburger-menu');
                 if (hamburger) {
                     hamburger.addEventListener('click', toggleMenu);
+                } else {
+                    console.warn('Hamburger-menu ikke fundet');
                 }
 
                 // Tilføj event listener til mobilmenuens links for at lukke menuen
@@ -168,6 +185,8 @@
             const menu = document.getElementById('mobile-menu');
             if (menu) {
                 menu.classList.toggle('active');
+            } else {
+                console.warn('Mobilmenu ikke fundet');
             }
         }
         
