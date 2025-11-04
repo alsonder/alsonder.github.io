@@ -218,7 +218,7 @@ footer p {
     font-size: 16px;
 }
 
-/* Tabel styling (fra detaljer.html) */
+/* Tabel styling (fra kurser.html) */
 .course-table {
     width: 100%;
     border-collapse: collapse;
@@ -236,7 +236,7 @@ footer p {
     background-color: #f0f0f0;
 }
 
-/* 2-kolonne layout til detaljer-siden */
+/* 2-kolonne layout til kurser-siden */
 .two-column-layout {
     display: flex;
     gap: 40px;
