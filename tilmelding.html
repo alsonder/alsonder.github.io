@@ -33,7 +33,13 @@
     <style>
         .form-content form {
             max-width: 400px;
-            margin: 0 auto;
+            margin: 0; /* Fjernet 'auto' for at flugte venstre margin med teksten ovenover */
+        }
+        .form-content h2 {
+            margin-bottom: 15px; /* Lidt mere plads under overskriften */
+        }
+        .form-content p {
+            margin-bottom: 30px; /* Øget afstand mellem introduktionstekst og formular */
         }
         .mc-field-group {
             margin-bottom: 20px;
