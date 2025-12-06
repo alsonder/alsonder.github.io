@@ -23,6 +23,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: alsonder/kompendie
+          ref: main            # <-- SIG MEGET VIGTIGT
           token: ${{ secrets.GITHUB_TOKEN }}
           path: kompendie
 
