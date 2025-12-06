@@ -3,11 +3,11 @@ name: Update Kompendie
 on:
   push:
   schedule:
-    - cron: "0 * * * *"   # Kører hver time
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 permissions:
-  contents: write   # Til at pushe ændringer
+  contents: write
 
 jobs:
   build:
@@ -44,28 +44,28 @@ jobs:
         run: |
           pandoc kompendie/kompendie/main.tex -s -o kompendie_html/main.html
 
-      # 6️⃣ Konverter kapitler (ét niveau)
-      - name: Convert chapters
+      # 6️⃣ Konverter kapitler (første niveau)
+      - name: Convert first-level chapters
         run: |
           for file in kompendie/kompendie/kapitler/*/*.tex; do
             base=$(basename "$file" .tex)
             pandoc "$file" -s -o "kompendie_html/chapters/$base.html"
           done
 
-      # 7️⃣ Konverter underafsnit (to niveauer)
-      - name: Convert subsections
+      # 7️⃣ Konverter underkapitler (anden niveau)
+      - name: Convert sub-chapters
         run: |
           for file in kompendie/kompendie/kapitler/*/*/*.tex; do
             base=$(basename "$file" .tex)
             pandoc "$file" -s -o "kompendie_html/sections/$base.html"
           done
 
-      # 8️⃣ Kopier PDF (hvis du har genereret den fra Overleaf)
+      # 8️⃣ Kopier PDF (fra Overleaf output)
       - name: Copy PDF
         run: |
           cp kompendie/kompendie/output/*.pdf assets/kompendie/ || echo "No PDF found"
 
-      # 9️⃣ Lav index.html med menu
+      # 9️⃣ Generer index.html med menu
       - name: Generate index
         run: |
           echo "<!DOCTYPE html><html><head><meta charset='utf-8'><title>Kompendie</title>" > kompendie_html/index.html
@@ -73,6 +73,7 @@ jobs:
           
           echo "<nav><h2>Kapitelmenu</h2>" >> kompendie_html/index.html
 
+          # Hovedkapitler
           echo "<h3>Hovedkapitler</h3><ul>" >> kompendie_html/index.html
           for file in kompendie_html/chapters/*.html; do
             base=$(basename "$file" .html)
@@ -80,6 +81,7 @@ jobs:
           done
           echo "</ul>" >> kompendie_html/index.html
 
+          # Underkapitler
           echo "<h3>Sektioner</h3><ul>" >> kompendie_html/index.html
           for file in kompendie_html/sections/*.html; do
             base=$(basename "$file" .html)
@@ -92,7 +94,7 @@ jobs:
 
           echo "<iframe name='kapitel' src='main.html'></iframe></body></html>" >> kompendie_html/index.html
 
-      # 🔟 Deploy til website-repo
+      # 🔟 Deploy til website repo
       - name: Deploy
         run: |
           rm -rf kompendie
