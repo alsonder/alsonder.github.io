@@ -103,4 +103,4 @@ jobs:
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
           git commit -m "Update kompendie" || echo "Nothing to commit"
-          git push
+          git push --force
