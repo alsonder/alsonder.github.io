@@ -14,13 +14,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout website repo med fuld historik
+      # 1. Checkout website repo med fuld historik
       - name: Checkout website repo
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Hent hele historikken, så push kan lykkes
+          fetch-depth: 0
 
-      # 2️⃣ Checkout kompendie repo (privat)
+      # 2. Checkout det private kompendie repo
       - name: Checkout kompendie repo
         uses: actions/checkout@v3
         with:
@@ -29,11 +29,11 @@ jobs:
           token: ${{ secrets.COMPENDIE_PAT }}
           path: kompendie
 
-      # 3️⃣ Installer pandoc og LaTeX
-      - name: Install pandoc
+      # 3. Installer pandoc og LaTeX
+      - name: Install pandoc & LaTeX
         run: sudo apt-get update && sudo apt-get install -y pandoc texlive-latex-base
 
-      # 4️⃣ Forbered output-mapper
+      # 4. Forbered mapper
       - name: Prepare directories
         run: |
           rm -rf kompendie_html
@@ -41,12 +41,12 @@ jobs:
           mkdir -p kompendie_html/sections
           mkdir -p assets/kompendie
 
-      # 5️⃣ Konverter main.tex til HTML
+      # 5. Konverter main.tex
       - name: Convert main.tex
         run: |
           pandoc kompendie/kompendie/main.tex -s -o kompendie_html/main.html
 
-      # 6️⃣ Konverter første niveau kapitler
+      # 6. Konverter kapitler (første niveau)
       - name: Convert first-level chapters
         run: |
           for file in kompendie/kompendie/kapitler/*/*.tex; do
@@ -54,7 +54,7 @@ jobs:
             pandoc "$file" -s -o "kompendie_html/chapters/$base.html"
           done
 
-      # 7️⃣ Konverter underkapitler
+      # 7. Konverter sektioner/under-kapitler
       - name: Convert sub-chapters
         run: |
           for file in kompendie/kompendie/kapitler/*/*/*.tex; do
@@ -62,33 +62,34 @@ jobs:
             pandoc "$file" -s -o "kompendie_html/sections/$base.html"
           done
 
-      # 8️⃣ Kopier PDF (fra Overleaf output)
+      # 8. Kopier PDF fra Overleaf-output
       - name: Copy PDF
         run: |
           cp kompendie/kompendie/output/*.pdf assets/kompendie/ || echo "No PDF found"
 
-      # 9️⃣ Generer index.html med menu
-      - name: Generate index
+      # 9. Generer index.html med menu
+      - name: Generate index.html
         run: |
           echo "<!DOCTYPE html><html><head><meta charset='utf-8'><title>Kompendie</title>" > kompendie_html/index.html
-          echo "<style>body{display:flex;font-family:sans-serif;}nav{width:260px;padding:20px;background:#f5f5f5;height:100vh;overflow-y:auto;}iframe{flex:1;border:none;height:100vh;}</style></head><body>" >> kompendie_html/index.html
+          echo "<style>body{display:flex;font-family:sans-serif;}nav{width:260px;padding:20px;background:#f5f5f5;height:100vh;overflow-y:auto;position:fixed;}iframe{margin-left:280px;width:calc(100% - 280px);height:100vh;border:none;}</style></head><body>" >> kompendie_html/index.html
           echo "<nav><h2>Kapitelmenu</h2>" >> kompendie_html/index.html
           echo "<h3>Hovedkapitler</h3><ul>" >> kompendie_html/index.html
           for file in kompendie_html/chapters/*.html; do
+            [ -f "$file" ] || continue
             base=$(basename "$file" .html)
             echo "<li><a href='chapters/$base.html' target='kapitel'>$base</a></li>" >> kompendie_html/index.html
           done
-          echo "</ul>" >> kompendie_html/index.html
-          echo "<h3>Sektioner</h3><ul>" >> kompendie_html/index.html
+          echo "</ul><h3>Sektioner</h3><ul>" >> kompendie_html/index.html
           for file in kompendie_html/sections/*.html; do
+            [ -f "$file" ] || continue
             base=$(basename "$file" .html)
             echo "<li><a href='sections/$base.html' target='kapitel'>$base</a></li>" >> kompendie_html/index.html
           done
           echo "</ul>" >> kompendie_html/index.html
-          echo "<p><a href='/assets/kompendie/kompendie.pdf' download>Download PDF</a></p>" >> kompendie_html/index.html
-          echo "</nav>" >> kompendie_html/index.html
-          echo "<iframe name='kapitel' src='main.html'></iframe></body></html>" >> kompendie_html/index.html
+          echo "<p><a href='/assets/kompendie/kompendie.pdf' download>📥 Download PDF</a></p>" >> kompendie_html/index.html
+          echo "</nav><iframe name='kapitel' src='main.html'></iframe></body></html>" >> kompendie_html/index.html
 
+      # 10. Deploy – med den magiske linje der fikser alt
       - name: Deploy to GitHub Pages
         run: |
           rm -rf kompendie
@@ -106,5 +107,5 @@ jobs:
           
           git commit -m "Auto-update kompendie – $(date -u '+%Y-%m-%d %H:%M UTC')"
           
-          # DENNE LINJE ER AFGØRENDE:
+          # Denne linje gør at det virker HVER gang
           git push origin main --force-with-lease
