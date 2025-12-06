@@ -44,7 +44,7 @@ jobs:
         run: |
           pandoc kompendie/kompendie/main.tex -s -o kompendie_html/main.html
 
-      # 6️⃣ Konverter kapitler (første niveau)
+      # 6️⃣ Konverter første niveau kapitler
       - name: Convert first-level chapters
         run: |
           for file in kompendie/kompendie/kapitler/*/*.tex; do
@@ -52,7 +52,7 @@ jobs:
             pandoc "$file" -s -o "kompendie_html/chapters/$base.html"
           done
 
-      # 7️⃣ Konverter underkapitler (anden niveau)
+      # 7️⃣ Konverter underkapitler
       - name: Convert sub-chapters
         run: |
           for file in kompendie/kompendie/kapitler/*/*/*.tex; do
