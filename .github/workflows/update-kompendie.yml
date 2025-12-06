@@ -24,7 +24,7 @@ jobs:
         with:
           repository: alsonder/kompendie
           ref: main            # <-- SIG MEGET VIGTIGT
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.COMPENDIE_PAT }}
           path: kompendie
 
       # Installer pandoc og LaTeX basics
