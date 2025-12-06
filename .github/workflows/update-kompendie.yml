@@ -7,65 +7,93 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write   # <-- VIGTIGT!
+  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      # Hent website repo
       - name: Checkout website repo
         uses: actions/checkout@v3
 
+      # Hent kompendie repo
       - name: Checkout kompendie repo
         uses: actions/checkout@v3
         with:
           repository: alsonder/kompendie
-          token: ${{ secrets.GITHUB_TOKEN }}   # fungerer hvis workflowet ligger i samme org/user
+          token: ${{ secrets.GITHUB_TOKEN }}
           path: kompendie
 
+      # Installer pandoc og LaTeX basics
       - name: Install pandoc
         run: sudo apt-get update && sudo apt-get install -y pandoc texlive-latex-base
 
-      - name: Prepare directories
+      # Forbered mapper
+      - name: Prepare output
         run: |
           rm -rf kompendie_html
           mkdir -p kompendie_html/chapters
+          mkdir -p kompendie_html/sections
           mkdir -p assets/kompendie
 
-      - name: Convert chapters to HTML
+      # Konverter main.tex til HTML
+      - name: Convert main.tex
         run: |
-          for file in kompendie/chapters/*.tex; do
+          pandoc kompendie/main.tex -s -o kompendie_html/main.html
+
+      # Konverter kapitler (ét niveau)
+      - name: Convert chapters
+        run: |
+          for file in kompendie/kapitler/*/*.tex; do
             base=$(basename "$file" .tex)
             pandoc "$file" -s -o "kompendie_html/chapters/$base.html"
           done
 
-      - name: Copy PDF
+      # Konverter underafsnit (to niveauer)
+      - name: Convert subsections
         run: |
-          cp kompendie/output/*.pdf assets/kompendie/
+          for file in kompendie/kapitler/*/*/*.tex; do
+            base=$(basename "$file" .tex)
+            pandoc "$file" -s -o "kompendie_html/sections/$base.html"
+          done
 
-      - name: Generate main page with chapter menu
+      # Lav index.html med menu
+      - name: Generate index
         run: |
-          echo "<!DOCTYPE html><html><head><meta charset='utf-8'><title>Kompendie</title><style>body{display:flex;font-family:sans-serif;}nav{width:220px;padding:20px;background:#f5f5f5;height:100vh;overflow-y:auto;}iframe{flex:1;border:none;height:100vh;}</style></head><body>" > kompendie_html/index.html
+          echo "<!DOCTYPE html><html><head><meta charset='utf-8'><title>Kompendie</title>" > kompendie_html/index.html
+          echo "<style>body{display:flex;font-family:sans-serif;}nav{width:260px;padding:20px;background:#f5f5f5;height:100vh;overflow-y:auto;}iframe{flex:1;border:none;height:100vh;}</style></head><body>" >> kompendie_html/index.html
           
-          echo "<nav><h2>Kapitelmenu</h2><ul>" >> kompendie_html/index.html
+          echo "<nav><h2>Kapitelmenu</h2>" >> kompendie_html/index.html
+
+          echo "<h3>Hovedkapitler</h3><ul>" >> kompendie_html/index.html
           for file in kompendie_html/chapters/*.html; do
             base=$(basename "$file" .html)
             echo "<li><a href='chapters/$base.html' target='kapitel'>$base</a></li>" >> kompendie_html/index.html
           done
           echo "</ul>" >> kompendie_html/index.html
-          echo "<p><a href='/assets/kompendie/kompendie.pdf' download>Download PDF</a></p>" >> kompendie_html/index.html
-          echo "</nav>" >> kompendie_html/index.html
-          
-          echo "<iframe name='kapitel' src='chapters/01-intro.html'></iframe>" >> kompendie_html/index.html
-          echo "</body></html>" >> kompendie_html/index.html
 
-      - name: Deploy to site
+          echo "<h3>Sektioner</h3><ul>" >> kompendie_html/index.html
+          for file in kompendie_html/sections/*.html; do
+            base=$(basename "$file" .html)
+            echo "<li><a href='sections/$base.html' target='kapitel'>$base</a></li>" >> kompendie_html/index.html
+          done
+          echo "</ul>" >> kompendie_html/index.html
+
+          echo "<p><a href='/assets/kompendie/kompendie.pdf' download>Download PDF</a></p>" >> kompendie_html/index.html
+
+          echo "</nav>" >> kompendie_html/index.html
+
+          echo "<iframe name='kapitel' src='main.html'></iframe></body></html>" >> kompendie_html/index.html
+
+      # Deploy changes
+      - name: Deploy
         run: |
           rm -rf kompendie
           mv kompendie_html kompendie
           git add .
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
-          git commit -m "Update kompendie" || echo "No changes"
+          git commit -m "Update kompendie" || echo "Nothing to commit"
           git push
