@@ -89,23 +89,22 @@ jobs:
           echo "</nav>" >> kompendie_html/index.html
           echo "<iframe name='kapitel' src='main.html'></iframe></body></html>" >> kompendie_html/index.html
 
-      # 🔟 Deploy med pull + rebase for at undgå konflikter
       - name: Deploy to GitHub Pages
         run: |
           rm -rf kompendie
           mv kompendie_html kompendie
           
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
           
           git add .
           
           if git diff --cached --quiet; then
-            echo "No changes detected – nothing to deploy"
+            echo "Ingen ændringer – intet at deploye"
             exit 0
           fi
           
-          git commit -m "Auto-update kompendie – $(date '+%Y-%m-%d %H:%M UTC')"
-
-          # Safe force-push – this is the gold standard for *.github.io deployments
+          git commit -m "Auto-update kompendie – $(date -u '+%Y-%m-%d %H:%M UTC')"
+          
+          # DENNE LINJE ER AFGØRENDE:
           git push origin main --force-with-lease
