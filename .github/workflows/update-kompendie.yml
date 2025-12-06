@@ -89,26 +89,16 @@ jobs:
           echo "</nav>" >> kompendie_html/index.html
           echo "<iframe name='kapitel' src='main.html'></iframe></body></html>" >> kompendie_html/index.html
 
-      # 🔟 Deploy til website repo med forced pull og push
+      # 🔟 Deploy med pull + rebase for at undgå konflikter
       - name: Deploy
         run: |
-          # Slet gammel kompendie
           rm -rf kompendie
           mv kompendie_html kompendie
-
-          # Konfigurer git
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
-
-          # Tilføj filer
           git add .
-
-          # Lav commit
           git commit -m "Update kompendie" || echo "Nothing to commit"
-
-          # Hent remote ændringer og rebaser for at undgå push fejl
+          # Hent remote ændringer og rebase
           git fetch origin main
           git rebase origin/main || git rebase --abort
-
-          # Push ændringer
           git push origin main --force
