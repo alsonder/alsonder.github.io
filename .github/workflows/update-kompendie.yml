@@ -1,44 +1,38 @@
 name: Update Kompendie
 
-# Trigger workflow
 on:
   push:
   schedule:
-    - cron: "0 * * * *"   # Kører hver time
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 permissions:
-  contents: read   # nødvendigt for at hente private repos med GITHUB_TOKEN
+  contents: write   # <-- VIGTIGT!
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout hjemmeside repo
       - name: Checkout website repo
         uses: actions/checkout@v3
 
-      # Checkout kompendie repo (privat)
       - name: Checkout kompendie repo
         uses: actions/checkout@v3
         with:
           repository: alsonder/kompendie
-          token: ${{ secrets.GITHUB_TOKEN }}  # Eller: secrets.COMPENDIUM_PAT hvis du bruger PAT
+          token: ${{ secrets.GITHUB_TOKEN }}   # fungerer hvis workflowet ligger i samme org/user
           path: kompendie
 
-      # Installer pandoc
       - name: Install pandoc
         run: sudo apt-get update && sudo apt-get install -y pandoc texlive-latex-base
 
-      # Ryd gamle genererede filer og lav mapper
       - name: Prepare directories
         run: |
           rm -rf kompendie_html
           mkdir -p kompendie_html/chapters
           mkdir -p assets/kompendie
 
-      # Konverter kapitler fra .tex til .html
       - name: Convert chapters to HTML
         run: |
           for file in kompendie/chapters/*.tex; do
@@ -46,12 +40,10 @@ jobs:
             pandoc "$file" -s -o "kompendie_html/chapters/$base.html"
           done
 
-      # Kopier PDF fra Overleaf output
       - name: Copy PDF
         run: |
           cp kompendie/output/*.pdf assets/kompendie/
 
-      # Generer index.html med venstremenu
       - name: Generate main page with chapter menu
         run: |
           echo "<!DOCTYPE html><html><head><meta charset='utf-8'><title>Kompendie</title><style>body{display:flex;font-family:sans-serif;}nav{width:220px;padding:20px;background:#f5f5f5;height:100vh;overflow-y:auto;}iframe{flex:1;border:none;height:100vh;}</style></head><body>" > kompendie_html/index.html
@@ -68,7 +60,6 @@ jobs:
           echo "<iframe name='kapitel' src='chapters/01-intro.html'></iframe>" >> kompendie_html/index.html
           echo "</body></html>" >> kompendie_html/index.html
 
-      # Deploy til hjemmesiden
       - name: Deploy to site
         run: |
           rm -rf kompendie
