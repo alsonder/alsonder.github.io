@@ -3,22 +3,22 @@ name: Update Kompendie
 on:
   push:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "0 * * * *"   # Kører hver time
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: write   # Til at pushe ændringer
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout website repo
+      # 1️⃣ Checkout website repo
       - name: Checkout website repo
         uses: actions/checkout@v3
 
-      # Checkout kompendie repo
+      # 2️⃣ Checkout kompendie repo (privat)
       - name: Checkout kompendie repo
         uses: actions/checkout@v3
         with:
@@ -27,46 +27,50 @@ jobs:
           token: ${{ secrets.COMPENDIE_PAT }}
           path: kompendie
 
-      # Install pandoc & LaTeX
+      # 3️⃣ Installer pandoc og LaTeX
       - name: Install pandoc
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y pandoc texlive-latex-base
+        run: sudo apt-get update && sudo apt-get install -y pandoc texlive-latex-base
 
-      # Prepare directories
-      - name: Prepare output
+      # 4️⃣ Forbered output-mapper
+      - name: Prepare directories
         run: |
           rm -rf kompendie_html
           mkdir -p kompendie_html/chapters
           mkdir -p kompendie_html/sections
           mkdir -p assets/kompendie
 
-      # Convert main.tex
+      # 5️⃣ Konverter main.tex til HTML
       - name: Convert main.tex
         run: |
-          pandoc kompendie/main.tex -s -o kompendie_html/main.html
+          pandoc kompendie/kompendie/main.tex -s -o kompendie_html/main.html
 
-      # Convert chapters
+      # 6️⃣ Konverter kapitler (ét niveau)
       - name: Convert chapters
         run: |
-          for file in kompendie/kapitler/*/*.tex; do
+          for file in kompendie/kompendie/kapitler/*/*.tex; do
             base=$(basename "$file" .tex)
             pandoc "$file" -s -o "kompendie_html/chapters/$base.html"
           done
 
-      # Convert subsections
+      # 7️⃣ Konverter underafsnit (to niveauer)
       - name: Convert subsections
         run: |
-          for file in kompendie/kapitler/*/*/*.tex; do
+          for file in kompendie/kompendie/kapitler/*/*/*.tex; do
             base=$(basename "$file" .tex)
             pandoc "$file" -s -o "kompendie_html/sections/$base.html"
           done
 
-      # Build index.html
+      # 8️⃣ Kopier PDF (hvis du har genereret den fra Overleaf)
+      - name: Copy PDF
+        run: |
+          cp kompendie/kompendie/output/*.pdf assets/kompendie/ || echo "No PDF found"
+
+      # 9️⃣ Lav index.html med menu
       - name: Generate index
         run: |
           echo "<!DOCTYPE html><html><head><meta charset='utf-8'><title>Kompendie</title>" > kompendie_html/index.html
           echo "<style>body{display:flex;font-family:sans-serif;}nav{width:260px;padding:20px;background:#f5f5f5;height:100vh;overflow-y:auto;}iframe{flex:1;border:none;height:100vh;}</style></head><body>" >> kompendie_html/index.html
+          
           echo "<nav><h2>Kapitelmenu</h2>" >> kompendie_html/index.html
 
           echo "<h3>Hovedkapitler</h3><ul>" >> kompendie_html/index.html
@@ -85,9 +89,10 @@ jobs:
 
           echo "<p><a href='/assets/kompendie/kompendie.pdf' download>Download PDF</a></p>" >> kompendie_html/index.html
           echo "</nav>" >> kompendie_html/index.html
+
           echo "<iframe name='kapitel' src='main.html'></iframe></body></html>" >> kompendie_html/index.html
 
-      # Deploy to repo
+      # 🔟 Deploy til website-repo
       - name: Deploy
         run: |
           rm -rf kompendie
