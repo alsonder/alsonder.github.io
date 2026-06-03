@@ -12,12 +12,12 @@
     <meta property="og:description" content="Se alle vores jagttegnskurser: undervisning, materiale, underviser og kursuskalender. Start december 2025.">
     
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="🦊 Kurser - Østerbro Jagttegn">
-    <meta property="twitter:description" content="Se alle vores jagttegnskurser: undervisning, materiale, underviser og kursuskalender. Start december 2025.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🦊 Kurser - Østerbro Jagttegn">
+    <meta name="twitter:description" content="Se alle vores jagttegnskurser: undervisning, materiale, underviser og kursuskalender. Start december 2025.">
     
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦊</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A6%8A%3C/text%3E%3C/svg%3E">
 
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-4BV4PEQX4N"></script>
@@ -39,9 +39,11 @@
 <p>Holdene er små med maks. 10 deltagere, og lektionerne er tilrettelagt med mindst mulig gene for familie- og arbejdsliv.</p>
 
 <h2>Undervisningsmateriale</h2>
-<p>Undervisningen følger pensum fastsat af myndigheden. Alle deltagere får adgang til komplet materiale: præsentationer, lovtekster og tests. Der er ikke behov for at købe supplerende materiale.</p>
+                <p>Undervisningen følger pensum fastsat af myndigheden. Alle deltagere får adgang til komplet materiale: præsentationer, lovtekster og tests. Der er ikke behov for at købe supplerende materiale.</p>
 
-<div class="column">
+            </div>
+
+            <div class="column">
     <h2>Underviser</h2>
     <p>Undervisningen varetages af Aleksander Sønder – certificeret jagttegnsunderviser og skydeinstruktør. Aleksander er passioneret jæger med knap 30 års erfaring med jagt og en særlig forkærlighed for ande- og kronvildtsjagt i Thy. Han bor på Østerbro med sin familie og jagthunden Amy.</p>
     <p>Hans undervisning kombinerer praktisk træning med online quizzes, der gør teorien tilgængelig og engagerende. Aleksander er også udvikler bag læringssystemet <a href="https://osjagttegn.dk">OS Jagttegn</a>, der hjælper aspiranter med at træne pensum.</p>
@@ -285,6 +287,9 @@ Kurset kan påbegyndes september, oktober, november, januar, februar eller marts
     </tbody>
 </table>
 
+    </div>
+    </div>
+
     <div id="footer-placeholder"></div>
 
     <script>
@@ -296,8 +301,11 @@ Kurset kan påbegyndes september, oktober, november, januar, februar eller marts
                 document.getElementById(elementId).innerHTML = html;
                 console.log(`Header loaded for ${url}`); // Log for at verificere indlæsning
 
+                // Scope event listeners to the loaded fragment
+                const fragment = document.getElementById(elementId);
+
                 // Tilføj event listener til hamburger-menuen
-                const hamburger = document.querySelector('.hamburger-menu');
+                const hamburger = fragment.querySelector('.hamburger-menu');
                 if (hamburger) {
                     hamburger.addEventListener('click', toggleMenu);
                 } else {
@@ -305,7 +313,7 @@ Kurset kan påbegyndes september, oktober, november, januar, februar eller marts
                 }
 
                 // Tilføj event listener til mobilmenuens links for at lukke menuen
-                const menuLinks = document.querySelectorAll('.mobile-menu ul li a');
+                const menuLinks = fragment.querySelectorAll('.mobile-menu ul li a');
                 menuLinks.forEach(link => {
                     link.addEventListener('click', () => {
                         const menu = document.getElementById('mobile-menu');
@@ -316,7 +324,7 @@ Kurset kan påbegyndes september, oktober, november, januar, februar eller marts
                 });
 
                 // Tilføj event listener til lukkeknap
-                const closeButton = document.querySelector('.close-menu');
+                const closeButton = fragment.querySelector('.close-menu');
                 if (closeButton) {
                     closeButton.addEventListener('click', toggleMenu);
                 }
