@@ -70,7 +70,7 @@
 </head>
 <body>
     <div id="header-placeholder"></div>    
-    <div class="container flex-container">
+    <div class="container flex-container fullscreen-hero">
         <div class="text-content">
             <h1>Tag jagttegn i København – mellem Østerbro og Hellerup</h1>
             <p>Vi er en lille, hyggelig jagtskole med 60–80 kursister om året. Vores kurser findes i både kompakte og mere langstrakte former, og der er maksimalt 10 deltagere på hvert hold. Jagtudøvelse giver en fantastisk forbindelse til naturen og bidrager ofte til en god vildtforvaltning. Kurser afholdes kun 3 minutter fra Svanemøllen Station.</p>
@@ -125,10 +125,20 @@
             }
         }
 
-        // Indlæs header og footer
-        document.addEventListener('DOMContentLoaded', () => {
-            loadHTML('header.html', 'header-placeholder');
-            loadHTML('footer.html', 'footer-placeholder');
+        // Opdater CSS-variabel med header-højde, kald på load/resize
+        function updateHeaderHeight() {
+            const header = document.querySelector('header');
+            const height = header ? header.offsetHeight : 0;
+            document.documentElement.style.setProperty('--header-height', height + 'px');
+        }
+
+        // Indlæs header og footer, og opdater header-højde når de er indlæst
+        document.addEventListener('DOMContentLoaded', async () => {
+            await loadHTML('header.html', 'header-placeholder');
+            await loadHTML('footer.html', 'footer-placeholder');
+            // header er nu indsat i DOM
+            updateHeaderHeight();
+            window.addEventListener('resize', updateHeaderHeight);
         });
     </script>
 </body>

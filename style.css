@@ -6,6 +6,22 @@
     box-sizing: border-box;
 }
 
+:root {
+    --header-height: 70px; /* juster hvis headerens faktiske højde er en anden */
+}
+
+/* Gør hero-sektionen fuldskærm (trækker header-højde fra) på alle skærmstørrelser når klassen bruges */
+.container.fullscreen-hero {
+    height: calc(100dvh - var(--header-height)); /* brug dynamisk viewport-højde */
+    min-height: calc(100dvh - var(--header-height));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow: hidden; /* undgå side-scroll ved små afvigelser */
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -187,9 +203,11 @@ footer p {
 }
 
 .image-content img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        display: block;
+        object-fit: cover;
 }
 
 /* Formular og billede layout (til tilmelding.html) */
@@ -441,15 +459,49 @@ footer p {
     .container.flex-container {
         flex-direction: column;
         text-align: center;
-        gap: 20px;
+        gap: 12px; /* mindre lodret afstand mellem tekst og billede på mobil */
+    }
+
+    /* Gør hero-sektionen fuld højde på mobil (trækker header-højde fra) */
+    .container.flex-container.fullscreen-hero,
+    .container.flex-container {
+        min-height: calc(100vh - var(--header-height));
+        justify-content: center; /* centrerer indhold lodret */
+        padding-top: 8px;
+        padding-bottom: 8px;
     }
 
     .text-content {
         max-width: none;
-        margin-bottom: 20px;
-    }    .image-content {
+        margin-bottom: 12px;
+    }
+
+    .image-content {
         max-width: none;
-    }    footer {
+    }
+
+    /* Gør billedet smallere og centreret for bedre balance mod teksten */
+    .image-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 0;
+    }
+
+    .image-content img {
+        max-width: 320px; /* begræns billedets visuelle størrelse på mobil */
+        width: 100%;
+        height: auto;
+        margin: 0 auto;
+    }
+
+    /* Begræns billedhøjde så hero ikke skroller */
+    .container.fullscreen-hero .image-content img {
+        max-height: calc((100dvh - var(--header-height)) * 0.45);
+        width: auto;
+    }
+
+    footer {
         padding: 20px 15px;
     }    /* Responsive 2-kolonne layout */
     .two-column-layout {
@@ -609,5 +661,32 @@ footer p {
 
     .spots-label {
         font-size: 13px;
+    }
+
+    /* Reducer afstand mellem tekst og billede på meget små skærme */
+    .container.flex-container {
+        gap: 10px;
+    }
+
+    .text-content {
+        margin-bottom: 10px;
+    }
+
+    /* Yderligere billedbegrænsning for små telefoner */
+    .image-content img {
+        max-width: 280px;
+    }
+
+    /* Endnu strengere højdebegrænsning på små telefoner */
+    .container.fullscreen-hero .image-content img {
+        max-height: calc((100dvh - var(--header-height)) * 0.4);
+        width: auto;
+    }
+
+    /* Sikr fuldskærms-hero også på meget små skærme */
+    .container.flex-container,
+    .container.flex-container.fullscreen-hero {
+        min-height: calc(100dvh - var(--header-height));
+        justify-content: center;
     }
 }
