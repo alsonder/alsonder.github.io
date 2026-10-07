@@ -1,3 +1,6 @@
+/* Google Fonts import */
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
+
 /* Grundlæggende styling */
 * {
     box-sizing: border-box;
@@ -32,6 +35,7 @@ header {
 }
 
 .logo-text a {
+    font-family: 'Lora', serif;
     font-size: 28px;
     font-weight: bold;
     color: #006400;
