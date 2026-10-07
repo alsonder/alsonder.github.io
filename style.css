@@ -86,8 +86,10 @@ header {
 
 .mobile-menu {
     display: none;
-    background-color: #006400;
-    padding: 15px;
+    background-color: #f6f9f6; /* lys baggrund */
+    border-bottom: 1px solid #dfe8df;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    padding: 10px 15px 20px;
     position: absolute;
     top: 100%;
     left: 0;
@@ -112,20 +114,36 @@ header {
 }
 
 .mobile-menu ul li {
-    margin: 10px 0;
+    width: 100%;
+    margin: 0;
+    border-bottom: 1px solid #e3ebe3;
+    text-align: center;
+}
+
+.mobile-menu ul li:last-child {
+    border-bottom: 0;
 }
 
 .mobile-menu ul li a {
-    color: #fff;
+    display: block;
+    padding: 14px 0;
+    color: #006400;
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.mobile-menu ul li a:hover,
+.mobile-menu ul li a:active {
+    color: #004d00;
+    background-color: #e8f0e8;
 }
 
 .close-menu {
     display: none;
     font-size: 24px;
-    color: #fff;
+    color: #006400;
     cursor: pointer;
     text-align: right;
     padding: 10px;
