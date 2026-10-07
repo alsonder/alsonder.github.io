@@ -6,22 +6,6 @@
     box-sizing: border-box;
 }
 
-:root {
-    --header-height: 70px; /* juster hvis headerens faktiske højde er en anden */
-}
-
-/* Gør hero-sektionen fuldskærm (trækker header-højde fra) på alle skærmstørrelser når klassen bruges */
-.container.fullscreen-hero {
-    height: calc(100dvh - var(--header-height)); /* brug dynamisk viewport-højde */
-    min-height: calc(100dvh - var(--header-height));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 0;
-    padding-bottom: 0;
-    overflow: hidden; /* undgå side-scroll ved små afvigelser */
-}
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -30,7 +14,15 @@ body {
     color: #006400;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; /* fallback til ældre browsere */
+    min-height: 100dvh;
+}
+
+/* Bruges kun på index.html: præcis skærmhøjde, ingen scroll */
+body.no-scroll-page {
+    height: 100vh; /* fallback */
+    height: 100dvh;
+    overflow: hidden;
 }
 
 /* Header styling */
@@ -39,6 +31,7 @@ header {
     color: #006400;
     border-bottom: 1px solid #eee;
     position: relative;
+    flex: 0 0 auto;
 }
 
 .header-inner {
@@ -155,6 +148,21 @@ header {
     flex-grow: 1;
 }
 
+/* Hero-sektion: fylder præcis det der er tilbage mellem header og footer */
+.container.fullscreen-hero {
+    flex: 1 1 auto;
+    min-height: 0; /* vigtigt, så flex kan skrumpe */
+    height: auto;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 0;
+    padding-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
 /* Footer styling */
 footer {
     text-align: center;
@@ -163,6 +171,7 @@ footer {
     color: #006400;
     border-top: 1px solid #eee;
     margin-top: auto;
+    flex: 0 0 auto;
 }
 
 footer p {
@@ -203,11 +212,26 @@ footer p {
 }
 
 .image-content img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-        display: block;
-        object-fit: cover;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    object-fit: cover;
+}
+
+/* Billedet i hero må aldrig presse siden ud over skærmen */
+.container.fullscreen-hero .image-content {
+    min-height: 0;
+    max-height: 100%;
+}
+
+.container.fullscreen-hero .image-content img {
+    max-height: 100%;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
 }
 
 /* Formular og billede layout (til tilmelding.html) */
@@ -433,7 +457,6 @@ footer p {
     font-size: 14px;
     color: #6c757d;
     font-weight: normal;
-    font-weight: normal;
 }
 
 /* Responsive design */
@@ -448,11 +471,17 @@ footer p {
 
     .hamburger-menu {
         display: block;
-    }    .header-inner {
+    }
+
+    .header-inner {
         padding: 10px 15px;
-    }    .logo-text a {
+    }
+
+    .logo-text a {
         font-size: 24px;
-    }    .container {
+    }
+
+    .container {
         padding: 20px 15px;
     }
 
@@ -462,11 +491,9 @@ footer p {
         gap: 12px; /* mindre lodret afstand mellem tekst og billede på mobil */
     }
 
-    /* Gør hero-sektionen fuld højde på mobil (trækker header-højde fra) */
-    .container.flex-container.fullscreen-hero,
-    .container.flex-container {
-        min-height: calc(100vh - var(--header-height));
-        justify-content: center; /* centrerer indhold lodret */
+    /* Hero på mobil: centrer indhold lodret, højden styres af flex */
+    .container.flex-container.fullscreen-hero {
+        justify-content: center;
         padding-top: 8px;
         padding-bottom: 8px;
     }
@@ -478,10 +505,6 @@ footer p {
 
     .image-content {
         max-width: none;
-    }
-
-    /* Gør billedet smallere og centreret for bedre balance mod teksten */
-    .image-content {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -497,27 +520,33 @@ footer p {
 
     /* Begræns billedhøjde så hero ikke skroller */
     .container.fullscreen-hero .image-content img {
-        max-height: calc((100dvh - var(--header-height)) * 0.45);
+        max-height: 40dvh;
         width: auto;
     }
 
     footer {
         padding: 20px 15px;
-    }    /* Responsive 2-kolonne layout */
+    }
+
+    /* Responsive 2-kolonne layout */
     .two-column-layout {
         flex-direction: column;
         gap: 20px;
         margin-bottom: 20px;
-    }    /* Responsive køb kursus sektion */
+    }
+
+    /* Responsive køb kursus sektion */
     .booking-info {
         flex-direction: column;
         text-align: center;
         gap: 10px;
-    }    .price-info,
+    }
+
+    .price-info,
     .availability-info {
         align-items: center;
     }
-    
+
     /* Responsiv formular og billede layout */
     .form-image-container {
         flex-direction: column;
@@ -533,7 +562,9 @@ footer p {
     .course-list {
         padding-left: 15px;
         font-size: 14px;
-    }    /* Responsiv tabel - konverter til kort-layout på mobil */
+    }
+
+    /* Responsiv tabel - konverter til kort-layout på mobil */
     .course-table,
     .course-table thead,
     .course-table tbody,
@@ -610,7 +641,9 @@ footer p {
 @media (max-width: 480px) {
     body {
         padding: 0 5px;
-    }    .logo-text a {
+    }
+
+    .logo-text a {
         font-size: 20px;
     }
 
@@ -638,13 +671,17 @@ footer p {
     .course-table td {
         font-size: 13px;
         padding: 6px;
-    }    #mc_embed_signup {
+    }
+
+    #mc_embed_signup {
         font-size: 13px;
     }
 
     footer {
         padding: 20px 10px;
-    }    /* Ledig pladser modul på små skærme */
+    }
+
+    /* Ledig pladser modul på små skærme */
     .available-spots-module {
         margin: 12px auto 0 auto;
         padding: 6px 12px;
@@ -679,14 +716,7 @@ footer p {
 
     /* Endnu strengere højdebegrænsning på små telefoner */
     .container.fullscreen-hero .image-content img {
-        max-height: calc((100dvh - var(--header-height)) * 0.4);
+        max-height: 32dvh;
         width: auto;
-    }
-
-    /* Sikr fuldskærms-hero også på meget små skærme */
-    .container.flex-container,
-    .container.flex-container.fullscreen-hero {
-        min-height: calc(100dvh - var(--header-height));
-        justify-content: center;
     }
 }
