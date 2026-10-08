@@ -11,7 +11,7 @@ body {
     margin: 0;
     padding: 0 20px;
     background-color: #ffffff;
-    color: #006400;
+    color: #214d2a;
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* fallback */
@@ -28,7 +28,7 @@ body.no-scroll-page {
 /* Header styling */
 header {
     background-color: #ffffff;
-    color: #006400;
+    color: #214d2a;
     border-bottom: 1px solid #eee;
     position: relative;
 }
@@ -66,7 +66,7 @@ header {
 }
 
 .desktop-menu ul li a {
-    color: #006400;
+    color: #214d2a;
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;
@@ -74,14 +74,14 @@ header {
 }
 
 .desktop-menu ul li a:hover {
-    color: #004d00;
+    color: #173d22;
 }
 
 .hamburger-menu {
     display: none;
     font-size: 24px;
     cursor: pointer;
-    color: #006400;
+    color: #214d2a;
 }
 
 .mobile-menu {
@@ -127,7 +127,7 @@ header {
 .mobile-menu ul li a {
     display: block;
     padding: 14px 0;
-    color: #006400;
+    color: #214d2a;
     text-decoration: none;
     font-size: 18px;
     font-weight: bold;
@@ -136,14 +136,14 @@ header {
 
 .mobile-menu ul li a:hover,
 .mobile-menu ul li a:active {
-    color: #004d00;
+    color: #173d22;
     background-color: #e8f0e8;
 }
 
 .close-menu {
     display: none;
     font-size: 24px;
-    color: #006400;
+    color: #214d2a;
     cursor: pointer;
     text-align: right;
     padding: 10px;
@@ -168,7 +168,7 @@ footer {
     text-align: center;
     padding: 20px;
     background-color: transparent;
-    color: #006400;
+    color: #214d2a;
     border-top: 1px solid #eee;
     margin-top: auto;
 }
@@ -195,13 +195,13 @@ footer p {
 .text-content a {
     color: inherit;
     text-decoration: underline;
-    text-decoration-color: #006400;
+    text-decoration-color: #214d2a;
     text-decoration-thickness: 1px;
     text-underline-offset: 2px;
 }
 
 .text-content a:hover {
-    text-decoration-color: #004d00;
+    text-decoration-color: #173d22;
 }
 
 .image-content {
@@ -306,7 +306,7 @@ footer p {
 }
 
 .course-type {
-    border: 1px solid #006400;
+    border: 1px solid #214d2a;
     border-radius: 24px;
     padding: 20px;
     text-align: center;
@@ -346,7 +346,7 @@ footer p {
 /* Køb kursus sektion */
 .course-booking-section {
     background-color: #f8f9fa;
-    border: 2px solid #006400;
+    border: 2px solid #214d2a;
     border-radius: 8px;
     padding: 20px;
     margin: 20px 0;
@@ -354,7 +354,7 @@ footer p {
 }
 
 .course-booking-section h3 {
-    color: #006400;
+    color: #214d2a;
     margin-top: 0;
     margin-bottom: 15px;
     font-size: 1.3rem;
@@ -378,7 +378,7 @@ footer p {
 .price {
     font-size: 1.8rem;
     font-weight: bold;
-    color: #006400;
+    color: #214d2a;
 }
 
 .price-note {
@@ -404,7 +404,7 @@ footer p {
 }
 
 .buy-course-button {
-    background-color: #006400;
+    background-color: #214d2a;
     color: white;
     border: none;
     padding: 15px 30px;
@@ -418,7 +418,7 @@ footer p {
 }
 
 .buy-course-button:hover {
-    background-color: #004d00;
+    background-color: #173d22;
 }
 
 .buy-course-button:disabled {
@@ -612,7 +612,7 @@ footer p {
         padding-right: 10px;
         white-space: nowrap;
         font-weight: bold;
-        color: #006400;
+        color: #214d2a;
     }
 
     .course-table td:last-child {
