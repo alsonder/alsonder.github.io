@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -307,6 +311,18 @@ footer p {
     border-radius: 24px;
     padding: 20px;
     text-align: center;
+}
+
+/* Boks der linker ned til sit skema */
+.container a.course-type {
+    display: block;
+    color: inherit;
+    transition: background-color 0.2s ease;
+}
+
+.container a.course-type:hover {
+    color: inherit;
+    background-color: #f6f9f6;
 }
 
 .course-type h3 {
