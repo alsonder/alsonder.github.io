@@ -277,7 +277,13 @@ footer p {
     width: 100%;
     border-collapse: collapse;
     margin-top: 1rem;
+    table-layout: fixed;
 }
+
+/* Samme kolonnebredder i alle kursustabeller */
+.course-table th:nth-child(1) { width: 38%; }
+.course-table th:nth-child(2) { width: 30%; }
+.course-table th:nth-child(3) { width: 32%; }
 
 .course-table th,
 .course-table td {
