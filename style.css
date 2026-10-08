@@ -191,17 +191,14 @@ footer p {
     max-width: 500px;
 }
 
-/* Diskret link styling i tekst-indhold */
-.text-content a {
-    color: inherit;
-    text-decoration: underline;
-    text-decoration-color: #214d2a;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
+/* Link styling i sideindhold */
+.container a {
+    color: #8b3a0e;
+    text-decoration: none;
 }
 
-.text-content a:hover {
-    text-decoration-color: #173d22;
+.container a:hover {
+    color: #5e2709;
 }
 
 .image-content {
