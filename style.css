@@ -337,6 +337,24 @@ footer p {
     font-size: 16px;
 }
 
+/* Luftigere tekst på rene tekstsider (praktisk-traening.html) */
+.text-page p {
+    line-height: 1.6;
+    margin: 0 0 1.1em;
+}
+
+.text-page h2 {
+    margin-bottom: 0.8em;
+}
+
+.text-page .course-table {
+    margin: 0.5em 0 0;
+}
+
+.text-page p.after-table {
+    margin-top: 1.5em;
+}
+
 /* Tabel styling (fra kurser.html) */
 .course-table {
     width: 100%;
