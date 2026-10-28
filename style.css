@@ -81,6 +81,56 @@ header {
     color: #173d22;
 }
 
+/* Dropdown under Produkter */
+.desktop-menu .has-dropdown {
+    position: relative;
+}
+
+/* Lille pil efter Produkter, centreret på linjen */
+.dropdown-arrow {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 6px;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid currentColor;
+    vertical-align: middle;
+    position: relative;
+    top: -2px;
+}
+
+.desktop-menu ul.dropdown {
+    display: none;
+    flex-direction: column;
+    gap: 0;
+    position: absolute;
+    top: 100%;
+    left: -16px;
+    min-width: 260px;
+    padding: 10px 0;
+    background-color: #ffffff;
+    border: 1px solid #dfe8df;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    z-index: 1000;
+}
+
+.desktop-menu .has-dropdown:hover ul.dropdown,
+.desktop-menu .has-dropdown:focus-within ul.dropdown {
+    display: flex;
+}
+
+.desktop-menu ul.dropdown li a {
+    display: block;
+    padding: 8px 16px;
+    font-weight: normal;
+}
+
+.desktop-menu ul.dropdown li a:hover {
+    background-color: #f6f9f6;
+}
+
 .hamburger-menu {
     display: none;
     font-size: 24px;
@@ -142,6 +192,21 @@ header {
 .mobile-menu ul li a:active {
     color: #173d22;
     background-color: #e8f0e8;
+}
+
+/* Undersider i mobilmenuen */
+.mobile-menu ul.submenu li {
+    border-bottom: 0;
+}
+
+.mobile-menu ul.submenu li a {
+    padding: 8px 0;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.mobile-menu ul.submenu li:last-child a {
+    padding-bottom: 14px;
 }
 
 .close-menu {

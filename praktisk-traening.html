@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplerende praktisk træning (afstand/skydning) - Østerbro Jagttegn</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png?v=4">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png?v=4">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4BV4PEQX4N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-4BV4PEQX4N');
+</script>
+</head>
+<body>
+    <div id="header-placeholder"></div>    
+<div class="container">
+        <h2>Supplerende praktisk træning (afstand/skydning)</h2>
+        <p>For nogle aspiranter kan det være fornuftigt at tilkøbe ekstra undervisning i skydning og afstandsbedømmelse. Det kan enten skyldes generel usikkerhed, eller at der er gået for lang tid mellem det afsluttede jagttegnskursus og datoen for selve jagtprøven. En instruktionstime indeholder som udgangspunkt 2 afstandsbedømmelsesserier og 25 skud, og en del af timen gennemføres som en 1:1-simulering af den officielle praktiske prøve. Indholdet kan dog varieres efter aftale. En instruktionstime koster 600,-.</p>
+        <p>Følgende timer er ledige:</p>
+
+<table class="course-table">
+    <thead>
+        <tr>
+            <th>Dato</th>
+            <th>Indhold</th>
+            <th>Tidspunkt</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td data-label="Dato">Torsdag 29/10 2026</td><td data-label="Indhold">Instruktionstime (afstand/skydning)</td><td data-label="Tidspunkt">12:20 – 13:10</td></tr>
+        <tr><td data-label="Dato">Torsdag 29/10 2026</td><td data-label="Indhold">Instruktionstime (afstand/skydning)</td><td data-label="Tidspunkt">13:10 – 14:00</td></tr>
+    </tbody>
+</table>
+
+        <p><a href="kontakt.html">Kontakt</a> for at booke en time.</p>
+</div>
+    <div id="footer-placeholder"></div>
+
+    <script>
+        // Funktion til at indlæse HTML fra en fil
+        async function loadHTML(url, elementId) {
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+
+                // Tilføj event listener til hamburger-menuen
+                const hamburger = document.querySelector('.hamburger-menu');
+                if (hamburger) {
+                    hamburger.addEventListener('click', toggleMenu);
+                }
+
+                // Tilføj event listener til mobilmenuens links for at lukke menuen
+                const menuLinks = document.querySelectorAll('.mobile-menu ul li a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        const menu = document.getElementById('mobile-menu');
+                        if (menu) {
+                            menu.classList.remove('active');
+                        }
+                    });
+                });
+
+                // Tilføj event listener til lukkeknap
+                const closeButton = document.querySelector('.close-menu');
+                if (closeButton) {
+                    closeButton.addEventListener('click', toggleMenu);
+                }
+            } catch (error) {
+                console.error(`Fejl ved indlæsning af ${url}:`, error);
+            }
+        }
+
+        // Funktion til at toggle mobilmenu
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) {
+                menu.classList.toggle('active');
+            }
+        }
+
+        // Indlæs header og footer
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHTML('header.html', 'header-placeholder');
+            loadHTML('footer.html', 'footer-placeholder');
+        });
+    </script>
+</body>
+</html>
