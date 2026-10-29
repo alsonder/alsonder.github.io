@@ -81,12 +81,12 @@ header {
     color: #173d22;
 }
 
-/* Dropdown under Produkter */
+/* Dropdown under Undervisning */
 .desktop-menu .has-dropdown {
     position: relative;
 }
 
-/* Lille pil efter Produkter, centreret på linjen */
+/* Lille pil efter Undervisning, centreret på linjen */
 .dropdown-arrow {
     display: inline-block;
     width: 0;
@@ -194,7 +194,7 @@ header {
     background-color: #e8f0e8;
 }
 
-/* Undersider i mobilmenuen: Produkter folder ud ved tryk */
+/* Undersider i mobilmenuen: Undervisning folder ud ved tryk */
 .mobile-menu details.mobile-group summary {
     display: block;
     list-style: none;
